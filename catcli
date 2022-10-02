@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -e
+
+export CATCLI_WORKDIR=$(cd $(dirname $0) && pwd)
+
+cli_help() {
+    cli_name=${0##*/}
+    echo "
+        $cli_name
+        Cat Cli
+        
+        Usage: $cli_name [command]
+
+        Commands:
+            hascat  HasCat
+            *       Help
+    "
+    exit 1
+}
+
+case "$1" in
+    hascat)
+        "$CATCLI_WORKDIR/src/shService" "$2"
+        ;;
+    *)
+        cli_help
+        ;;
+esac
